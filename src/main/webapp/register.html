@@ -1,0 +1,1134 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GYMORA | Member Registration</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* =========================================
+           BODY
+           ========================================= */
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px;
+            position: relative;
+            overflow-x: hidden;
+            background: #1d1d1d;
+        }
+
+
+        /* =========================================
+           BLURRED BACKGROUND IMAGE
+           ========================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -40px;
+            left: -40px;
+            width: calc(100% + 80px);
+            height: calc(100% + 80px);
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.48),
+                    rgba(0, 0, 0, 0.48)
+                ),
+                url("images/gym-login.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            filter: blur(15px);
+
+            z-index: -2;
+
+            transform: scale(1.04);
+        }
+
+
+        /* =========================================
+           SOFT OVERLAY
+           ========================================= */
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           MAIN REGISTRATION CONTAINER
+           ========================================= */
+
+        .register-container {
+            width: 1380px;
+            max-width: 100%;
+            min-height: 790px;
+
+            display: flex;
+
+            background: #ffffff;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.38);
+
+            position: relative;
+        }
+
+
+        /* =========================================
+           LEFT IMAGE SECTION
+           ========================================= */
+
+        .left-section {
+            width: 58%;
+            min-height: 790px;
+
+            position: relative;
+
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.08),
+                    rgba(0, 0, 0, 0.70)
+                ),
+                url("images/gym-login.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        /* =========================================
+           LOGO
+           ========================================= */
+
+        .logo {
+            position: absolute;
+
+            top: 38px;
+            left: 42px;
+
+            color: white;
+
+            font-size: 37px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.60);
+
+            z-index: 5;
+        }
+
+        .logo span {
+            color: #ff603d;
+        }
+
+
+        /* =========================================
+           HOME BUTTON
+           ========================================= */
+
+        .home-button {
+            position: absolute;
+
+            top: 38px;
+            right: 42px;
+
+            padding: 11px 20px;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            border: 1px solid rgba(255, 255, 255, 0.40);
+
+            border-radius: 12px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            transition: 0.25s;
+
+            z-index: 10;
+        }
+
+        .home-button:hover {
+            background: #ff603d;
+
+            border-color: #ff603d;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(255, 96, 61, 0.30);
+        }
+
+
+        /* =========================================
+           LEFT CONTENT
+           ========================================= */
+
+        .image-content {
+            position: absolute;
+
+            left: 42px;
+            right: 42px;
+
+            bottom: 42px;
+
+            color: white;
+        }
+
+
+        .image-content h2 {
+            font-size: 35px;
+
+            font-weight: 750;
+
+            margin-bottom: 11px;
+
+            text-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.65);
+        }
+
+
+        .image-description {
+            max-width: 570px;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 24px;
+
+            color:
+                rgba(255, 255, 255, 0.95);
+        }
+
+
+        /* =========================================
+           FEATURES
+           ========================================= */
+
+        .features {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            max-width: 650px;
+        }
+
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            padding: 10px 17px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.40);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .check {
+            color: #7dff92;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            margin-right: 7px;
+        }
+
+
+        /* =========================================
+           RIGHT SECTION
+           ========================================= */
+
+        .right-section {
+            width: 42%;
+
+            min-height: 790px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 75px;
+        }
+
+
+        /* =========================================
+           REGISTER BOX
+           ========================================= */
+
+        .register-box {
+            width: 100%;
+
+            max-width: 450px;
+        }
+
+
+        /* =========================================
+           SMALL BRAND TEXT
+           ========================================= */
+
+        .register-box::before {
+            content: "GYMORA FITNESS CLUB";
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            color: #c7cbd0;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================
+           WELCOME
+           ========================================= */
+
+        .welcome h1 {
+            font-size: 37px;
+
+            color: #20242a;
+
+            font-weight: 750;
+
+            line-height: 1.3;
+
+            margin-bottom: 12px;
+        }
+
+
+        .welcome h1 span {
+            color: #ff5d3b;
+        }
+
+
+        .welcome p {
+            color: #898e96;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================
+           FORM ROW
+           ========================================= */
+
+        .form-row {
+            display: flex;
+
+            gap: 15px;
+        }
+
+
+        /* =========================================
+           INPUT GROUP
+           ========================================= */
+
+        .input-group {
+            width: 100%;
+
+            margin-bottom: 18px;
+        }
+
+
+        .input-group label {
+            display: block;
+
+            color: #444950;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            margin-bottom: 9px;
+        }
+
+
+        /* =========================================
+           INPUT BOX
+           ========================================= */
+
+        .input-box {
+            position: relative;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            left: 17px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9da2a9;
+
+            font-size: 17px;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           INPUT + SELECT
+           ========================================= */
+
+        .input-box input,
+        .input-box select {
+            width: 100%;
+
+            height: 54px;
+
+            border:
+                1px solid #e0e3e7;
+
+            border-radius: 14px;
+
+            background: #fafbfc;
+
+            outline: none;
+
+            padding:
+                0 16px 0 48px;
+
+            font-size: 14px;
+
+            color: #292d32;
+
+            transition: 0.25s;
+        }
+
+
+        .input-box input::placeholder {
+            color: #a4a8ae;
+        }
+
+
+        .input-box input:focus,
+        .input-box select:focus {
+            border-color: #ff603d;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(255, 96, 61, 0.08);
+        }
+
+
+        /* =========================================
+           DATE
+           ========================================= */
+
+        .input-box input[type="date"] {
+            color: #292d32;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           REGISTER BUTTON
+           ========================================= */
+
+        .register-button {
+            width: 100%;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b42,
+                    #ff3d68
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.4px;
+
+            cursor: pointer;
+
+            margin-top: 3px;
+
+            box-shadow:
+                0 12px 28px
+                rgba(255, 75, 75, 0.25);
+
+            transition: 0.25s;
+        }
+
+
+        .register-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 34px
+                rgba(255, 75, 75, 0.32);
+        }
+
+
+        /* =========================================
+           ACCOUNT NOTE
+           ========================================= */
+
+        .account-note {
+            margin-top: 18px;
+
+            padding: 12px 14px;
+
+            border-radius: 12px;
+
+            background: #fff6f2;
+
+            color: #8b6b63;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           LOGIN LINK
+           ========================================= */
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #898e95;
+
+            font-size: 13px;
+        }
+
+
+        .login-link a {
+            color: #ff603d;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            margin-left: 3px;
+        }
+
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 1050px) {
+
+            body {
+                padding: 25px;
+            }
+
+            .register-container {
+                flex-direction: column;
+
+                min-height: auto;
+            }
+
+            .left-section {
+                width: 100%;
+
+                min-height: 520px;
+            }
+
+            .right-section {
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 65px 50px;
+            }
+
+            .register-box {
+                max-width: 600px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 10px;
+
+                overflow: auto;
+            }
+
+            .register-container {
+                border-radius: 20px;
+            }
+
+            .left-section {
+                min-height: 440px;
+            }
+
+            .logo {
+                top: 25px;
+
+                left: 25px;
+
+                font-size: 28px;
+            }
+
+            .home-button {
+                top: 22px;
+
+                right: 22px;
+
+                padding: 9px 13px;
+
+                font-size: 11px;
+            }
+
+            .image-content {
+                left: 25px;
+
+                right: 25px;
+
+                bottom: 25px;
+            }
+
+            .image-content h2 {
+                font-size: 24px;
+            }
+
+            .image-description {
+                font-size: 12px;
+
+                line-height: 1.5;
+            }
+
+            .feature {
+                font-size: 11px;
+
+                padding: 8px 11px;
+            }
+
+            .right-section {
+                padding: 45px 25px;
+            }
+
+            .form-row {
+                flex-direction: column;
+
+                gap: 0;
+            }
+
+            .welcome h1 {
+                font-size: 28px;
+            }
+
+            .welcome p {
+                font-size: 13px;
+
+                margin-bottom: 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         MAIN REGISTRATION CARD
+         ========================================= -->
+
+    <div class="register-container">
+
+
+        <!-- =====================================
+             LEFT IMAGE SECTION
+             ===================================== -->
+
+        <div class="left-section">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                GYM<span>ORA</span>
+
+            </div>
+
+
+            <!-- HOME BUTTON -->
+
+            <a href="index.html" class="home-button">
+
+                🏠 Home
+
+            </a>
+
+
+            <!-- LEFT CONTENT -->
+
+            <div class="image-content">
+
+                <h2>
+
+                    Start Your Fitness Journey
+
+                </h2>
+
+
+                <p class="image-description">
+
+                    Create your GYMORA member account
+                    and take the first step towards a
+                    healthier and stronger lifestyle.
+
+                </p>
+
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <span class="check">✓</span>
+
+                        Personal Profile
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">✓</span>
+
+                        Attendance Tracking
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">✓</span>
+
+                        Workout Plans
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">✓</span>
+
+                        Membership
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             RIGHT REGISTRATION SECTION
+             ===================================== -->
+
+        <div class="right-section">
+
+
+            <div class="register-box">
+
+
+                <!-- TITLE -->
+
+                <div class="welcome">
+
+                    <h1>
+
+                        Join <span>GYMORA</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Create your member account
+                        to get started.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- REGISTRATION FORM -->
+
+                <form
+                    action="RegisterServlet"
+                    method="post"
+                >
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="input-group">
+
+                        <label for="fullName">
+
+                            Full Name
+
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span class="input-icon">
+
+                                👤
+
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL + PHONE -->
+
+                    <div class="form-row">
+
+
+                        <div class="input-group">
+
+                            <label for="email">
+
+                                Email Address
+
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <span class="input-icon">
+
+                                    ✉
+
+                                </span>
+
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="input-group">
+
+                            <label for="phone">
+
+                                Phone Number
+
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <span class="input-icon">
+
+                                    ☎
+
+                                </span>
+
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Enter phone number"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DOB + GENDER -->
+
+                    <div class="form-row">
+
+
+                        <div class="input-group">
+
+                            <label for="dob">
+
+                                Date of Birth
+
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <span class="input-icon">
+
+                                    📅
+
+                                </span>
+
+
+                                <input
+                                    type="date"
+                                    id="dob"
+                                    name="dob"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="input-group">
+
+                            <label for="gender">
+
+                                Gender
+
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <span class="input-icon">
+
+                                    ⚧
+
+                                </span>
+
+
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+
+                                        Select Gender
+
+                                    </option>
+
+                                    <option value="Male">
+
+                                        Male
+
+                                    </option>
+
+                                    <option value="Female">
+
+                                        Female
+
+                                    </option>
+
+                                    <option value="Other">
+
+                                        Other
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CREATE ACCOUNT -->
+
+                    <button
+                        type="submit"
+                        class="register-button"
+                    >
+
+                        CREATE MEMBER ACCOUNT
+
+                    </button>
+
+                </form>
+
+
+
+                <!-- ACCOUNT INFORMATION -->
+
+                <div class="account-note">
+
+                    Your GYMORA username and password
+                    will be automatically created after
+                    successful registration.
+
+                </div>
+
+
+
+                <!-- LOGIN -->
+
+                <div class="login-link">
+
+                    Already have an account?
+
+                    <a href="login.html">
+
+                        Login
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+```

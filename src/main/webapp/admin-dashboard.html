@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GYMORA | Admin Dashboard</title>
+
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+
+/* BODY */
+
+body{
+
+    min-height:100vh;
+    background:#34363b;
+    color:#292d32;
+    position:relative;
+
+}
+
+
+
+/* BACKGROUND */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:-35px;
+
+
+    background-image:
+
+    linear-gradient(
+        rgba(25,25,28,0.62),
+        rgba(25,25,28,0.62)
+    ),
+
+    url("images/gym-login.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    filter:blur(18px);
+
+    transform:scale(1.08);
+
+    z-index:-2;
+
+}
+
+
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(30,31,35,0.18);
+
+    z-index:-1;
+
+}
+
+
+
+/* SIDEBAR */
+
+
+.sidebar{
+
+    position:fixed;
+
+    left:20px;
+
+    top:20px;
+
+    bottom:20px;
+
+    width:245px;
+
+
+    background:rgba(255,255,255,0.96);
+
+    border-radius:24px;
+
+
+    padding:28px 18px;
+
+
+    box-shadow:
+    0 22px 60px rgba(0,0,0,0.25);
+
+
+    z-index:100;
+
+}
+
+
+/* LOGO */
+
+
+.logo{
+
+    color:#20242a;
+
+    font-size:27px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    padding:0 15px;
+
+    margin-bottom:42px;
+
+}
+
+
+.logo span{
+
+    color:#ff603d;
+
+}
+
+
+/* MENU TITLE */
+
+
+.menu-title{
+
+    color:#a0a4aa;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    padding:0 15px;
+
+    margin-bottom:12px;
+
+}
+
+
+/* MENU */
+
+
+.menu{
+
+    list-style:none;
+
+}
+
+
+.menu li{
+
+    margin-bottom:6px;
+
+}
+
+
+
+.menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:13px 15px;
+
+    border-radius:11px;
+
+
+    color:#686e77;
+
+
+    text-decoration:none;
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+
+    transition:0.25s;
+
+}
+
+
+
+.menu a:hover,
+.menu a.active{
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #ffd8cc,
+        #ffc7b8
+    );
+
+
+    color:#e94f2f;
+
+}
+
+
+
+.menu-icon{
+
+    width:21px;
+
+    text-align:center;
+
+    font-size:16px;
+
+}
+
+
+/* LOGOUT */
+
+
+.logout{
+
+    position:absolute;
+
+    left:18px;
+
+    right:18px;
+
+    bottom:20px;
+
+}
+
+
+
+.logout a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+
+    padding:13px 15px;
+
+
+    color:#e55353;
+
+
+    text-decoration:none;
+
+
+    border-radius:11px;
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+.logout a:hover{
+
+    background:#fff1f1;
+
+}
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    margin-left:285px;
+
+    min-height:100vh;
+
+    padding:28px 35px 35px 0;
+
+}
+
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+
+.topbar{
+
+    height:65px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:22px;
+
+    color:white;
+
+}
+
+
+.page-title h1{
+
+    font-size:23px;
+
+}
+
+
+.page-title p{
+
+    font-size:12px;
+
+    color:rgba(255,255,255,0.72);
+
+}
+
+
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+
+.notification{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    position:relative;
+
+
+    box-shadow:
+    0 8px 22px rgba(0,0,0,0.18);
+
+}
+
+
+
+.notification-dot{
+
+    position:absolute;
+
+    top:7px;
+
+    right:7px;
+
+    width:8px;
+
+    height:8px;
+
+    background:#ff603d;
+
+    border-radius:50%;
+
+}
+
+
+
+/* =========================
+   PROFILE
+========================= */
+
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+
+.profile-image{
+
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff6b42,
+        #ff3d68
+    );
+
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    font-weight:700;
+
+}
+
+
+
+.profile-info strong{
+
+    display:block;
+
+    color:white;
+
+    font-size:13px;
+
+}
+
+
+
+.profile-info span{
+
+    font-size:11px;
+
+    color:rgba(255,255,255,0.65);
+
+}
+
+
+
+/* =========================
+CONTENT
+========================= */
+
+
+.content{
+
+    padding-bottom:20px;
+
+}
+
+
+
+/* =========================
+WELCOME CARD
+========================= */
+
+
+.welcome-box{
+
+    min-height:200px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+
+    background:white;
+
+
+    box-shadow:
+    0 18px 45px rgba(0,0,0,0.18);
+
+}
+
+
+
+.welcome-content{
+
+    width:55%;
+
+    padding:30px;
+
+}
+
+
+
+.welcome-content h2{
+
+    font-size:25px;
+
+    color:#20242a;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.welcome-content h2 span{
+
+    color:#ff603d;
+
+}
+
+
+
+.welcome-content p{
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    color:#777d85;
+
+}
+
+
+
+.orange-line{
+
+    width:45px;
+
+    height:4px;
+
+    border-radius:10px;
+
+
+    background:
+    linear-gradient(
+        90deg,
+        #ff6b42,
+        #ff3d68
+    );
+
+
+    margin-top:15px;
+
+}
+
+
+
+.motivation{
+
+    margin-top:15px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:#ff603d;
+
+}
+
+
+
+.welcome-image{
+
+    width:45%;
+
+    height:200px;
+
+    overflow:hidden;
+
+}
+
+
+
+.welcome-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    border-radius:17px;
+
+    padding:21px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+
+    box-shadow:
+
+    0 12px 30px rgba(0,0,0,0.13);
+
+}
+
+
+
+.card-info p{
+
+    color:#999ea5;
+
+    font-size:11px;
+
+}
+
+
+
+.card-info h2{
+
+    font-size:25px;
+
+    color:#252930;
+
+}
+
+
+
+.card-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:13px;
+
+
+    background:#fff0eb;
+
+    color:#ff603d;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    font-size:21px;
+
+}
+
+
+
+/* =========================
+   LOWER SECTION
+========================= */
+
+
+.section-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    1.4fr 1fr;
+
+    gap:20px;
+
+}
+
+
+
+
+.panel{
+
+    background:white;
+
+    border-radius:17px;
+
+    padding:23px;
+
+
+    box-shadow:
+
+    0 12px 30px rgba(0,0,0,0.13);
+
+}
+
+
+
+
+.panel-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:17px;
+
+}
+
+
+
+.panel-header h2{
+
+    font-size:16px;
+
+}
+
+
+
+/* =========================
+   RECENT MEMBERS
+========================= */
+
+
+.member{
+
+    display:flex;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #f0f1f3;
+
+}
+
+
+
+.member-avatar{
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #ff6b42,
+
+        #ff3d68
+
+    );
+
+
+    color:white;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    font-weight:700;
+
+
+    margin-right:11px;
+
+}
+
+
+
+
+.member-info h4{
+
+    font-size:13px;
+
+}
+
+
+
+.member-info p{
+
+    font-size:10px;
+
+    color:#92979e;
+
+}
+
+
+
+
+.status{
+
+    margin-left:auto;
+
+
+    background:#e9f8ed;
+
+    color:#35a653;
+
+
+    padding:5px 10px;
+
+
+    border-radius:20px;
+
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+@media(max-width:1000px){
+
+    .cards{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+    .section-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
+
+
+
+@media(max-width:700px){
+
+
+    .sidebar{
+
+        width:80px;
+
+    }
+
+
+    .main{
+
+        margin-left:110px;
+
+    }
+
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .welcome-box{
+
+        flex-direction:column;
+
+    }
+
+
+    .welcome-content,
+    .welcome-image{
+
+        width:100%;
+
+    }
+
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+
+<div class="logo">
+GYM<span>ORA</span>
+</div>
+
+
+<div class="menu-title">
+Main Menu
+</div>
+
+
+<ul class="menu">
+
+
+<li>
+<a href="#" class="active">
+<span class="menu-icon">⌂</span>
+<span>Dashboard</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">👥</span>
+<span>Members</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">✓</span>
+<span>Attendance</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">🏋</span>
+<span>Workout Plans</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">💳</span>
+<span>Payments</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">🥤</span>
+<span>Supplements</span>
+</a>
+</li>
+
+
+</ul>
+
+
+
+<div class="menu-title" style="margin-top:30px;">
+Management
+</div>
+
+
+
+<ul class="menu">
+
+
+<li>
+<a href="#">
+<span class="menu-icon">👨‍🏫</span>
+<span>Coaches</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">🔔</span>
+<span>Notifications</span>
+</a>
+</li>
+
+
+<li>
+<a href="#">
+<span class="menu-icon">📊</span>
+<span>Reports</span>
+</a>
+</li>
+
+
+</ul>
+
+
+
+
+<div class="logout">
+
+<a href="login.html">
+
+<span class="menu-icon">↪</span>
+<span>Logout</span>
+
+</a>
+
+</div>
+
+
+
+</aside>
+
+
+
+
+
+<!-- MAIN CONTENT -->
+
+
+<main class="main">
+
+
+
+<header class="topbar">
+
+
+<div class="page-title">
+
+<h1>
+Admin Dashboard
+</h1>
+
+<p>
+Manage your GYMORA fitness club
+</p>
+
+</div>
+
+
+
+<div class="top-right">
+
+
+<div class="notification">
+
+🔔
+
+<span class="notification-dot"></span>
+
+</div>
+
+
+
+<div class="profile">
+
+
+<div class="profile-image">
+A
+</div>
+
+
+
+<div class="profile-info">
+
+<strong>
+Gym Admin
+</strong>
+
+
+<span>
+Administrator
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+<section class="content">
+
+
+<div class="welcome-box">
+
+
+<div class="welcome-content">
+
+
+<h2>
+Welcome back,
+<span>
+Admin! 👋
+</span>
+</h2>
+
+
+
+<p>
+Manage members, coaches, attendance,
+payments and daily gym activities easily
+with GYMORA.
+</p>
+
+
+
+<div class="orange-line"></div>
+
+
+
+<div class="motivation">
+
+💪 Stay Strong • Stay Healthy • Keep Growing
+
+</div>
+
+
+</div>
+
+
+
+<div class="welcome-image">
+
+<img src="images/gym-login.jpg" alt="GYMORA Fitness">
+
+</div>
+
+
+</div>
+<!-- SUMMARY CARDS -->
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="card-info">
+
+<p>Total Members</p>
+
+<h2>24</h2>
+
+</div>
+
+
+<div class="card-icon">
+👥
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<div class="card-info">
+
+<p>Today's Attendance</p>
+
+<h2>18</h2>
+
+</div>
+
+
+<div class="card-icon">
+✓
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="card-info">
+
+<p>Payments Today</p>
+
+<h2>12</h2>
+
+</div>
+
+
+<div class="card-icon">
+💳
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="card-info">
+
+<p>Supplement Sales</p>
+
+<h2>8</h2>
+
+</div>
+
+
+<div class="card-icon">
+🥤
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- LOWER SECTION -->
+
+
+<div class="section-grid">
+
+
+
+
+
+<!-- RECENT MEMBERS -->
+
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<h2>
+Recent Members
+</h2>
+
+</div>
+
+
+
+
+
+<div class="member">
+
+
+<div class="member-avatar">
+A
+</div>
+
+
+<div class="member-info">
+
+<h4>
+Amal Kumar
+</h4>
+
+<p>
+Joined today
+</p>
+
+</div>
+
+
+
+<div class="status">
+Active
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="member">
+
+
+<div class="member-avatar">
+N
+</div>
+
+
+<div class="member-info">
+
+<h4>
+Nimal Silva
+</h4>
+
+<p>
+Joined yesterday
+</p>
+
+</div>
+
+
+
+<div class="status">
+Active
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="member">
+
+
+<div class="member-avatar">
+S
+</div>
+
+
+<div class="member-info">
+
+<h4>
+Sahan Perera
+</h4>
+
+<p>
+Joined 2 days ago
+</p>
+
+</div>
+
+
+
+<div class="status">
+Active
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ADMIN MESSAGE PANEL -->
+
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<h2>
+Admin Message
+</h2>
+
+</div>
+
+
+
+
+
+<p style="font-size:13px; color:#777d85; line-height:1.7;">
+
+
+👋 Welcome to GYMORA Admin Dashboard.
+
+<br><br>
+
+
+Stay organized and manage your gym activities efficiently.
+
+Keep track of members, attendance, payments and daily operations from one centralized system.
+
+
+<br><br>
+
+
+</p>
+
+
+
+<div class="orange-line"></div>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+</body>
+
+</html>

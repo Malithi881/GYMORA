@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GYMORA | Coach Dashboard</title>
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    min-height: 100vh;
+    background: #34363b;
+    color: #292d32;
+    position: relative;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -35px;
+
+    background-image:
+        linear-gradient(
+            rgba(25, 25, 28, 0.62),
+            rgba(25, 25, 28, 0.62)
+        ),
+        url("images/gym-login.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(18px);
+    transform: scale(1.08);
+
+    z-index: -2;
+}
+
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: rgba(30, 31, 35, 0.18);
+
+    z-index: -1;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    position: fixed;
+
+    left: 20px;
+    top: 20px;
+    bottom: 20px;
+
+    width: 245px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid rgba(255,255,255,0.75);
+
+    border-radius: 24px;
+
+    padding: 28px 18px;
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,0.25);
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+    color: #20242a;
+
+    font-size: 27px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    padding: 0 15px;
+
+    margin-bottom: 42px;
+}
+
+.logo span {
+    color: #ff603d;
+}
+
+
+/* =========================================
+   MENU TITLE
+========================================= */
+
+.menu-title {
+    color: #a0a4aa;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    padding: 0 15px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 6px;
+}
+
+.menu a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    border-radius: 11px;
+
+    color: #686e77;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+}
+
+
+/* ACTIVE / HOVER */
+
+.menu a:hover,
+.menu a.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd8cc,
+            #ffc7b8
+        );
+
+    color: #e94f2f;
+}
+
+
+.menu-icon {
+    width: 21px;
+
+    text-align: center;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   NOTIFICATION BADGE
+========================================= */
+
+.notification-menu {
+    position: relative;
+}
+
+.notification-badge {
+
+    position: absolute;
+
+    right: 13px;
+    top: 7px;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    background: #ff603d;
+
+    color: white;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.logout {
+
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+
+    bottom: 20px;
+}
+
+.logout a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    color: #e55353;
+
+    text-decoration: none;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+}
+
+.logout a:hover {
+    background: #fff1f1;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+
+    margin-left: 285px;
+
+    min-height: 100vh;
+
+    padding: 28px 35px 35px 0;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.topbar {
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+
+    color: white;
+}
+
+
+.page-title h1 {
+
+    font-size: 23px;
+
+    margin-bottom: 4px;
+}
+
+
+.page-title p {
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,0.72);
+}
+
+
+/* =========================================
+   TOP RIGHT
+========================================= */
+
+.top-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* =========================================
+   TOP NOTIFICATION
+========================================= */
+
+.notification {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.95);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition: 0.25s;
+}
+
+
+.notification:hover {
+    transform: translateY(-2px);
+}
+
+
+.notification-dot {
+
+    position: absolute;
+
+    top: 7px;
+    right: 7px;
+
+    width: 8px;
+    height: 8px;
+
+    background: #ff603d;
+
+    border-radius: 50%;
+
+    border: 2px solid white;
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.profile-image {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6b42,
+            #ff3d68
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.profile-info strong {
+
+    display: block;
+
+    color: white;
+
+    font-size: 13px;
+}
+
+
+.profile-info span {
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.65);
+}
+
+
+/* =========================================
+   NOTIFICATION PANEL
+========================================= */
+
+.notification-panel {
+
+    position: fixed;
+
+    top: 92px;
+
+    right: 35px;
+
+    width: 350px;
+
+    background: rgba(255,255,255,0.98);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.28);
+
+    padding: 20px;
+
+    z-index: 200;
+
+    display: none;
+
+    animation: notificationOpen 0.2s ease;
+}
+
+
+.notification-panel.show {
+    display: block;
+}
+
+
+@keyframes notificationOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   NOTIFICATION HEADER
+========================================= */
+
+.notification-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.notification-header h3 {
+
+    font-size: 16px;
+
+    color: #292d32;
+}
+
+
+.mark-read {
+
+    border: none;
+
+    background: none;
+
+    color: #ff603d;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   NOTIFICATION ITEM
+========================================= */
+
+.notification-item {
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f0f1f3;
+}
+
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   NOTIFICATION ICON
+========================================= */
+
+.notification-icon {
+
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #fff0eb;
+
+    color: #ff603d;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   NOTIFICATION TEXT
+========================================= */
+
+.notification-text h4 {
+
+    font-size: 12px;
+
+    color: #34383e;
+
+    margin-bottom: 3px;
+}
+
+
+.notification-text p {
+
+    font-size: 10px;
+
+    color: #92979e;
+
+    line-height: 1.5;
+}
+
+
+.notification-time {
+
+    font-size: 9px;
+
+    color: #b0b3b8;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.content {
+
+    padding-bottom: 20px;
+}
+
+
+/* =========================================
+   WELCOME BOX
+========================================= */
+
+.welcome-box {
+
+    min-height: 190px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.18);
+}
+
+
+/* LEFT TEXT */
+
+.welcome-content {
+
+    width: 55%;
+
+    padding: 30px 0 30px 30px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.welcome-content h2 {
+
+    font-size: 24px;
+
+    color: #20242a;
+
+    margin-bottom: 8px;
+}
+
+
+.welcome-content h2 span {
+    color: #ff603d;
+}
+
+
+.welcome-content p {
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: #777d85;
+
+    max-width: 520px;
+}
+
+
+/* ORANGE LINE */
+
+.orange-line {
+
+    width: 45px;
+    height: 4px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff6b42,
+            #ff3d68
+        );
+
+    margin-top: 17px;
+}
+
+
+/* =========================================
+   WELCOME IMAGE
+========================================= */
+
+.welcome-image {
+
+    width: 45%;
+
+    height: 190px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.welcome-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    filter: none;
+
+    transform: scale(1.02);
+}
+
+
+.welcome-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+    bottom: 0;
+
+    width: 100px;
+
+    background:
+        linear-gradient(
+            to right,
+            #ffffff,
+            transparent
+        );
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.card {
+
+    background: rgba(255,255,255,0.97);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    border-radius: 17px;
+
+    padding: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.13);
+
+    transition: 0.25s;
+}
+
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,0.17);
+}
+
+
+.card-info p {
+
+    color: #999ea5;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+.card-info h2 {
+
+    font-size: 25px;
+
+    color: #252930;
+}
+
+
+.card-icon {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: #fff0eb;
+
+    color: #ff603d;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================
+   LOWER SECTION
+========================================= */
+
+.section-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.4fr 1fr;
+
+    gap: 20px;
+}
+
+
+.panel {
+
+    background: rgba(255,255,255,0.97);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    border-radius: 17px;
+
+    padding: 23px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.13);
+}
+
+
+/* =========================================
+   PANEL HEADER
+========================================= */
+
+.panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 17px;
+}
+
+
+.panel-header h2 {
+
+    font-size: 16px;
+
+    color: #292d32;
+}
+
+
+.view-all {
+
+    color: #ff603d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================================
+   MEMBERS
+========================================= */
+
+.member {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid #f0f1f3;
+}
+
+
+.member:last-child {
+    border-bottom: none;
+}
+
+
+.member-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6b42,
+            #ff3d68
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+
+    font-size: 12px;
+
+    margin-right: 11px;
+}
+
+
+.member-info h4 {
+
+    font-size: 13px;
+
+    color: #34383e;
+
+    margin-bottom: 3px;
+}
+
+
+.member-info p {
+
+    color: #92979e;
+
+    font-size: 10px;
+}
+
+
+.status {
+
+    margin-left: auto;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    background: #e9f8ed;
+
+    color: #35a653;
+}
+
+
+/* =========================================
+   NOTIFICATION BOARD
+========================================= */
+
+.notification-board {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+}
+
+
+.board-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #f0f1f3;
+}
+
+
+.board-item:last-child {
+    border-bottom: none;
+}
+
+
+.board-icon {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    background: #fff0eb;
+
+    color: #ff603d;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 16px;
+
+    flex-shrink: 0;
+}
+
+
+.board-text {
+
+    flex: 1;
+}
+
+
+.board-text h4 {
+
+    font-size: 12px;
+
+    color: #34383e;
+
+    margin-bottom: 3px;
+}
+
+
+.board-text p {
+
+    font-size: 10px;
+
+    color: #92979e;
+
+    line-height: 1.5;
+}
+
+
+.board-time {
+
+    font-size: 9px;
+
+    color: #b0b3b8;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .section-grid {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+
+        left: 10px;
+
+        top: 10px;
+
+        bottom: 10px;
+
+        width: 70px;
+
+        padding: 25px 10px;
+
+        border-radius: 18px;
+    }
+
+
+    .logo {
+
+        font-size: 0;
+
+        text-align: center;
+
+        padding: 0;
+
+        margin-bottom: 35px;
+    }
+
+
+    .logo::before {
+
+        content: "G";
+
+        font-size: 25px;
+
+        color: #ff603d;
+    }
+
+
+    .menu-title {
+        display: none;
+    }
+
+
+    .menu a {
+
+        justify-content: center;
+
+        padding: 13px 5px;
+    }
+
+
+    .menu a span:not(.menu-icon) {
+        display: none;
+    }
+
+
+    .notification-badge {
+
+        right: 3px;
+
+        top: 4px;
+    }
+
+
+    .logout {
+
+        left: 10px;
+
+        right: 10px;
+    }
+
+
+    .logout a {
+
+        justify-content: center;
+    }
+
+
+    .logout a span:not(.menu-icon) {
+        display: none;
+    }
+
+
+    .main {
+
+        margin-left: 90px;
+
+        padding: 25px 20px 30px 0;
+    }
+
+
+    .profile-info {
+        display: none;
+    }
+
+
+    .notification-panel {
+
+        right: 20px;
+
+        width: 320px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .cards {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .welcome-box {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .welcome-content {
+
+        width: 100%;
+
+        padding: 25px;
+    }
+
+
+    .welcome-image {
+
+        width: 100%;
+
+        height: 180px;
+    }
+
+
+    .welcome-image::before {
+        display: none;
+    }
+
+
+    .page-title h1 {
+        font-size: 20px;
+    }
+
+
+    .notification-panel {
+
+        top: 80px;
+
+        right: 10px;
+
+        left: 10px;
+
+        width: auto;
+    }
+
+
+    .board-item {
+        align-items: flex-start;
+    }
+
+
+    .board-time {
+        display: none;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        GYM<span>ORA</span>
+    </div>
+
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <ul class="menu">
+
+        <!-- DASHBOARD -->
+
+        <li>
+
+            <a href="coach-dashboard.html" class="active">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- MEMBERS -->
+
+        <li>
+
+            <a href="#">
+
+                <span class="menu-icon">👥</span>
+
+                <span>Members</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- ATTENDANCE -->
+
+        <li>
+
+            <a href="#">
+
+                <span class="menu-icon">✓</span>
+
+                <span>Attendance</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- WORKOUT SCHEDULES -->
+
+        <li>
+
+            <a href="#">
+
+                <span class="menu-icon">🏋</span>
+
+                <span>Workout Schedules</span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <!-- MANAGEMENT -->
+
+    <div
+        class="menu-title"
+        style="margin-top: 30px;"
+    >
+
+        Management
+
+    </div>
+
+
+    <ul class="menu">
+
+        <!-- NOTIFICATIONS -->
+
+        <li class="notification-menu">
+
+            <a
+                href="javascript:void(0)"
+                onclick="toggleNotifications()"
+            >
+
+                <span class="menu-icon">🔔</span>
+
+                <span>Notifications</span>
+
+                <span
+                    class="notification-badge"
+                    id="notificationCount"
+                >
+                    3
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+    <!-- LOGOUT -->
+
+    <div class="logout">
+
+        <a href="login.html">
+
+            <span class="menu-icon">↪</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================
+     NOTIFICATION POPUP
+========================================= -->
+
+<div
+    class="notification-panel"
+    id="notificationPanel"
+>
+
+    <div class="notification-header">
+
+        <h3>
+            Notifications
+        </h3>
+
+        <button
+            class="mark-read"
+            onclick="markNotificationsRead()"
+        >
+            Mark all as read
+        </button>
+
+    </div>
+
+
+    <!-- NOTIFICATION 1 -->
+
+    <div class="notification-item">
+
+        <div class="notification-icon">
+            👥
+        </div>
+
+        <div class="notification-text">
+
+            <h4>
+                New Member Assigned
+            </h4>
+
+            <p>
+                A new member has been assigned to your coaching group.
+            </p>
+
+            <div class="notification-time">
+                10 minutes ago
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION 2 -->
+
+    <div class="notification-item">
+
+        <div class="notification-icon">
+            ✓
+        </div>
+
+        <div class="notification-text">
+
+            <h4>
+                Attendance Updated
+            </h4>
+
+            <p>
+                Today's member attendance has been updated.
+            </p>
+
+            <div class="notification-time">
+                30 minutes ago
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICATION 3 -->
+
+    <div class="notification-item">
+
+        <div class="notification-icon">
+            🏋
+        </div>
+
+        <div class="notification-text">
+
+            <h4>
+                Workout Schedule Reminder
+            </h4>
+
+            <p>
+                You have a workout schedule to review today.
+            </p>
+
+            <div class="notification-time">
+                1 hour ago
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div class="page-title">
+
+            <h1>
+                Coach Dashboard
+            </h1>
+
+            <p>
+                Manage your GYMORA members and activities
+            </p>
+
+        </div>
+
+
+        <div class="top-right">
+
+
+            <!-- TOP NOTIFICATION -->
+
+            <div
+                class="notification"
+                onclick="toggleNotifications()"
+                title="Notifications"
+            >
+
+                🔔
+
+                <span
+                    class="notification-dot"
+                    id="notificationDot"
+                ></span>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div class="profile">
+
+                <div class="profile-image">
+                    C
+                </div>
+
+                <div class="profile-info">
+
+                    <strong>
+                        Gym Coach
+                    </strong>
+
+                    <span>
+                        Coach
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         CONTENT
+    ========================================== -->
+
+    <section class="content">
+
+
+        <!-- =====================================
+             WELCOME BOX
+        ====================================== -->
+
+        <div class="welcome-box">
+
+
+            <div class="welcome-content">
+
+                <h2>
+
+                    Welcome back,
+
+                    <span>
+                        Coach!
+                    </span>
+
+                    👋
+
+                </h2>
+
+
+                <p>
+
+                    Keep track of your members,
+                    attendance and workout schedules
+                    from one place.
+
+                </p>
+
+
+                <div class="orange-line"></div>
+
+            </div>
+
+
+            <div class="welcome-image">
+
+                <img
+                    src="images/gym-login.jpg"
+                    alt="GYMORA Fitness"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             SUMMARY CARDS
+        ====================================== -->
+
+        <div class="cards">
+
+
+            <!-- MY MEMBERS -->
+
+            <div class="card">
+
+                <div class="card-info">
+
+                    <p>
+                        My Members
+                    </p>
+
+                    <h2>
+                        30
+                    </h2>
+
+                </div>
+
+
+                <div class="card-icon">
+                    👥
+                </div>
+
+            </div>
+
+
+
+            <!-- ATTENDANCE -->
+
+            <div class="card">
+
+                <div class="card-info">
+
+                    <p>
+                        Today's Attendance
+                    </p>
+
+                    <h2>
+                        18
+                    </h2>
+
+                </div>
+
+
+                <div class="card-icon">
+                    ✓
+                </div>
+
+            </div>
+
+
+
+            <!-- WORKOUT SCHEDULES -->
+
+            <div class="card">
+
+                <div class="card-info">
+
+                    <p>
+                        Workout Schedules
+                    </p>
+
+                    <h2>
+                        12
+                    </h2>
+
+                </div>
+
+
+                <div class="card-icon">
+                    🏋
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             LOWER SECTION
+        ====================================== -->
+
+        <div class="section-grid">
+
+
+            <!-- =================================
+                 RECENT MEMBERS
+            ================================== -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Recent Members
+                    </h2>
+
+                    <a
+                        href="#"
+                        class="view-all"
+                    >
+                        View All
+                    </a>
+
+                </div>
+
+
+                <!-- MEMBER 1 -->
+
+                <div class="member">
+
+                    <div class="member-avatar">
+                        A
+                    </div>
+
+                    <div class="member-info">
+
+                        <h4>
+                            Alex Perera
+                        </h4>
+
+                        <p>
+                            Member
+                        </p>
+
+                    </div>
+
+                    <div class="status">
+                        Active
+                    </div>
+
+                </div>
+
+
+                <!-- MEMBER 2 -->
+
+                <div class="member">
+
+                    <div class="member-avatar">
+                        S
+                    </div>
+
+                    <div class="member-info">
+
+                        <h4>
+                            Sarah Fernando
+                        </h4>
+
+                        <p>
+                            Member
+                        </p>
+
+                    </div>
+
+                    <div class="status">
+                        Active
+                    </div>
+
+                </div>
+
+
+                <!-- MEMBER 3 -->
+
+                <div class="member">
+
+                    <div class="member-avatar">
+                        R
+                    </div>
+
+                    <div class="member-info">
+
+                        <h4>
+                            Ravi Silva
+                        </h4>
+
+                        <p>
+                            Member
+                        </p>
+
+                    </div>
+
+                    <div class="status">
+                        Active
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 NOTIFICATION BOARD
+            ================================== -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Notification Board
+                    </h2>
+
+                </div>
+
+
+                <div class="notification-board">
+
+
+                    <!-- BOARD ITEM 1 -->
+
+                    <div class="board-item">
+
+                        <div class="board-icon">
+                            👥
+                        </div>
+
+                        <div class="board-text">
+
+                            <h4>
+                                New Member Assigned
+                            </h4>
+
+                            <p>
+                                A new member has been assigned to you.
+                            </p>
+
+                        </div>
+
+                        <div class="board-time">
+                            10m
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOARD ITEM 2 -->
+
+                    <div class="board-item">
+
+                        <div class="board-icon">
+                            ✓
+                        </div>
+
+                        <div class="board-text">
+
+                            <h4>
+                                Attendance Updated
+                            </h4>
+
+                            <p>
+                                Today's attendance records are updated.
+                            </p>
+
+                        </div>
+
+                        <div class="board-time">
+                            30m
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOARD ITEM 3 -->
+
+                    <div class="board-item">
+
+                        <div class="board-icon">
+                            🏋
+                        </div>
+
+                        <div class="board-text">
+
+                            <h4>
+                                Workout Schedule
+                            </h4>
+
+                            <p>
+                                A workout schedule needs your review.
+                            </p>
+
+                        </div>
+
+                        <div class="board-time">
+                            1h
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOARD ITEM 4 -->
+
+                    <div class="board-item">
+
+                        <div class="board-icon">
+                            📋
+                        </div>
+
+                        <div class="board-text">
+
+                            <h4>
+                                Schedule Reminder
+                            </h4>
+
+                            <p>
+                                Check today's scheduled sessions.
+                            </p>
+
+                        </div>
+
+                        <div class="board-time">
+                            2h
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+
+/* =========================================
+   TOGGLE NOTIFICATIONS
+========================================= */
+
+function toggleNotifications() {
+
+    const panel =
+        document.getElementById("notificationPanel");
+
+    panel.classList.toggle("show");
+}
+
+
+/* =========================================
+   MARK ALL AS READ
+========================================= */
+
+function markNotificationsRead() {
+
+    const count =
+        document.getElementById("notificationCount");
+
+    const dot =
+        document.getElementById("notificationDot");
+
+    count.style.display = "none";
+
+    dot.style.display = "none";
+}
+
+
+/* =========================================
+   CLOSE WHEN CLICK OUTSIDE
+========================================= */
+
+document.addEventListener("click", function(event) {
+
+    const panel =
+        document.getElementById("notificationPanel");
+
+    const notification =
+        document.querySelector(".notification");
+
+    const notificationMenu =
+        document.querySelector(".notification-menu");
+
+
+    if (
+
+        !panel.contains(event.target) &&
+
+        !notification.contains(event.target) &&
+
+        !notificationMenu.contains(event.target)
+
+    ) {
+
+        panel.classList.remove("show");
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

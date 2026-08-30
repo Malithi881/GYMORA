@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+
+    <meta http-equiv="Pragma"
+          content="no-cache">
+
+    <meta http-equiv="Expires"
+          content="0">
+
+    <title>GYMORA | Login</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 35px;
+
+            position: relative;
+
+            overflow-x: hidden;
+
+            background: #1d1d1d;
+        }
+
+
+        /* =========================================
+           BLURRED BACKGROUND IMAGE
+        ========================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            top: -40px;
+            left: -40px;
+
+            width: calc(100% + 80px);
+            height: calc(100% + 80px);
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.48),
+                    rgba(0, 0, 0, 0.48)
+                ),
+                url("images/gym-login.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            filter: blur(15px);
+
+            z-index: -2;
+
+            transform: scale(1.04);
+        }
+
+
+        /* =========================================
+           EXTRA SOFT OVERLAY
+        ========================================= */
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            z-index: -1;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           MAIN LOGIN CONTAINER
+        ========================================= */
+
+        .login-container {
+            width: 1380px;
+
+            max-width: 100%;
+
+            min-height: 790px;
+
+            display: flex;
+
+            background: #ffffff;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.38);
+
+            position: relative;
+        }
+
+
+        /* =========================================
+           LEFT IMAGE SECTION
+        ========================================= */
+
+        .left-section {
+            width: 58%;
+
+            min-height: 790px;
+
+            position: relative;
+
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.08),
+                    rgba(0, 0, 0, 0.70)
+                ),
+                url("images/gym-login.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo {
+            position: absolute;
+
+            top: 38px;
+            left: 42px;
+
+            color: white;
+
+            font-size: 37px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.60);
+
+            z-index: 5;
+        }
+
+        .logo span {
+            color: #ff603d;
+        }
+
+
+        /* =========================================
+           HOME BUTTON
+           SAME AS REGISTRATION PAGE
+           TOP RIGHT OF LEFT IMAGE
+        ========================================= */
+
+        .home-button {
+            position: absolute;
+
+            top: 38px;
+            right: 42px;
+
+            padding: 11px 20px;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            border: 1px solid rgba(255, 255, 255, 0.40);
+
+            border-radius: 12px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            transition: 0.25s;
+
+            z-index: 10;
+        }
+
+        .home-button:hover {
+            background: #ff603d;
+
+            border-color: #ff603d;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(255, 96, 61, 0.30);
+        }
+
+
+        /* =========================================
+           LEFT BOTTOM CONTENT
+        ========================================= */
+
+        .image-content {
+            position: absolute;
+
+            left: 42px;
+            right: 42px;
+
+            bottom: 42px;
+
+            color: white;
+        }
+
+        .image-content h2 {
+            font-size: 35px;
+
+            font-weight: 750;
+
+            margin-bottom: 11px;
+
+            text-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.65);
+        }
+
+        .image-description {
+            max-width: 570px;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 24px;
+
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            max-width: 650px;
+        }
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            padding: 10px 17px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.40);
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .check {
+            color: #7dff92;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            margin-right: 7px;
+        }
+
+
+        /* =========================================
+           RIGHT SECTION
+        ========================================= */
+
+        .right-section {
+            width: 42%;
+
+            min-height: 790px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 75px;
+        }
+
+
+        /* =========================================
+           LOGIN BOX
+        ========================================= */
+
+        .login-box {
+            width: 100%;
+
+            max-width: 450px;
+        }
+
+
+        /* =========================================
+           SMALL BRAND TEXT
+        ========================================= */
+
+        .login-box::before {
+            content: "GYMORA FITNESS CLUB";
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            color: #c7cbd0;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================
+           WELCOME
+        ========================================= */
+
+        .welcome h1 {
+            font-size: 37px;
+
+            color: #20242a;
+
+            font-weight: 750;
+
+            line-height: 1.3;
+
+            margin-bottom: 12px;
+        }
+
+        .welcome h1 span {
+            color: #ff5d3b;
+        }
+
+        .welcome p {
+            color: #898e96;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin-bottom: 41px;
+        }
+
+
+        /* =========================================
+           INPUT GROUP
+        ========================================= */
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+
+            color: #444950;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            margin-bottom: 9px;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 17px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9da2a9;
+
+            font-size: 17px;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            height: 58px;
+
+            border:
+                1px solid #e0e3e7;
+
+            border-radius: 14px;
+
+            background: #fafbfc;
+
+            outline: none;
+
+            padding:
+                0 16px 0 48px;
+
+            font-size: 14px;
+
+            color: #292d32;
+
+            transition: 0.25s;
+        }
+
+        .input-box input::placeholder {
+            color: #a4a8ae;
+        }
+
+        .input-box input:focus {
+            border-color: #ff603d;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(255, 96, 61, 0.08);
+        }
+
+
+        /* =========================================
+           OPTIONS
+        ========================================= */
+
+        .options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 29px;
+
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #777d85;
+
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 15px;
+
+            height: 15px;
+
+            accent-color: #ff603d;
+        }
+
+        .forgot {
+            color: #ff603d;
+
+            text-decoration: none;
+
+            font-weight: 650;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        .login-button {
+            width: 100%;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b42,
+                    #ff3d68
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.4px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 28px
+                rgba(255, 75, 75, 0.25);
+
+            transition: 0.25s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 34px
+                rgba(255, 75, 75, 0.32);
+        }
+
+
+        /* =========================================
+           REGISTER
+        ========================================= */
+
+        .register {
+            text-align: center;
+
+            margin-top: 29px;
+
+            color: #898e95;
+
+            font-size: 13px;
+        }
+
+        .register a {
+            color: #ff603d;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            margin-left: 3px;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 1050px) {
+
+            body {
+                padding: 25px;
+            }
+
+            .login-container {
+                flex-direction: column;
+
+                min-height: auto;
+            }
+
+            .left-section {
+                width: 100%;
+
+                min-height: 520px;
+            }
+
+            .right-section {
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 65px 50px;
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .login-container {
+                border-radius: 20px;
+            }
+
+            .left-section {
+                min-height: 440px;
+            }
+
+            .logo {
+                top: 25px;
+
+                left: 25px;
+
+                font-size: 28px;
+            }
+
+            /* SAME HOME BUTTON POSITION
+               RESPONSIVE FOR MOBILE */
+
+            .home-button {
+                top: 22px;
+
+                right: 22px;
+
+                padding: 9px 13px;
+
+                font-size: 11px;
+            }
+
+            .image-content {
+                left: 25px;
+
+                right: 25px;
+
+                bottom: 25px;
+            }
+
+            .image-content h2 {
+                font-size: 24px;
+            }
+
+            .image-description {
+                font-size: 12px;
+
+                line-height: 1.5;
+            }
+
+            .feature {
+                font-size: 11px;
+
+                padding: 8px 11px;
+            }
+
+            .right-section {
+                padding: 45px 25px;
+            }
+
+            .welcome h1 {
+                font-size: 28px;
+            }
+
+            .welcome p {
+                font-size: 13px;
+
+                margin-bottom: 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         MAIN LOGIN CONTAINER
+    ========================================= -->
+
+    <div class="login-container">
+
+
+        <!-- =====================================
+             LEFT IMAGE SECTION
+        ===================================== -->
+
+        <div class="left-section">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+                GYM<span>ORA</span>
+            </div>
+
+
+            <!-- =================================
+                 HOME BUTTON
+                 TOP RIGHT OF IMAGE
+            ================================= -->
+
+            <a href="index.html"
+               class="home-button">
+
+                🏠 Home
+
+            </a>
+
+
+            <!-- =================================
+                 LEFT BOTTOM CONTENT
+            ================================= -->
+
+            <div class="image-content">
+
+                <h2>
+                    Train • Grow • Repeat
+                </h2>
+
+                <p class="image-description">
+
+                    A smarter way to manage your gym,
+                    stay active, and keep your fitness
+                    journey on track.
+
+                </p>
+
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        Members
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        Attendance
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        Workout Plans
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        Supplements
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             RIGHT LOGIN AREA
+        ===================================== -->
+
+        <div class="right-section">
+
+
+            <div class="login-box">
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome">
+
+                    <h1>
+
+                        Welcome to
+                        <span>GYMORA</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Let's get stronger together.
+                        Sign in to continue.
+
+                    </p>
+
+                </div>
+
+
+                <!-- =================================
+                     LOGIN FORM
+                ================================= -->
+
+                <form
+                    action="LoginServlet"
+                    method="post"
+                >
+
+
+                    <!-- USERNAME / EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="username">
+
+                            Username or Email
+
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter username or email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="options">
+
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                name="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+
+                        <a
+                            href="forgot-password.html"
+                            class="forgot"
+                        >
+
+                            Forgot Password?
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+
+                        LOGIN
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- =================================
+                     REGISTER
+                ================================== -->
+
+                <div class="register">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+
+                        Register Now
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
